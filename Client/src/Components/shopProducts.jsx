@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from "react";
+import axiosClient from '../Services/api.js'
 
-function ShopProducts() {
+function ShopProducts({products}) {
   const [expanded, setExpanded] = useState(null);
 
-  const products = [
-    { img: "/images/img1.png", name: "Product 1", price: "$49.99", desc: "Premium quality product." },
-    { img: "/images/img1.png", name: "Product 2", price: "$59.99", desc: "Best selling product." },
-    { img: "/images/img1.png", name: "Product 3", price: "$39.99", desc: "Stylish and affordable." },
-    { img: "/images/img1.png", name: "Product 4", price: "$29.99", desc: "Compact and elegant." },
-    { img: "/images/img1.png", name: "Product 5", price: "$19.99", desc: "Budget friendly premium." },
-    { img: "/images/img1.png", name: "Product 6", price: "$49.99", desc: "Everyday usable product." },
-    { img: "/images/img1.png", name: "Product 7", price: "$59.99", desc: "Limited edition item." },
-    { img: "/images/img1.png", name: "Product 8", price: "$39.99", desc: "Lightweight and durable." },
-    { img: "/images/img1.png", name: "Product 9", price: "$29.99", desc: "Highly rated product." },
-    { img: "/images/img1.png", name: "Product 10", price: "$19.99", desc: "Best value choice." },
+  const handleAddToCart = async () => {
+  if (expanded === null) return;
 
-    { img: "/images/img1.png", name: "Product 1", price: "$49.99", desc: "Premium quality product." },
-    { img: "/images/img1.png", name: "Product 2", price: "$59.99", desc: "Best selling product." },
-    { img: "/images/img1.png", name: "Product 3", price: "$39.99", desc: "Stylish and affordable." },
-    { img: "/images/img1.png", name: "Product 4", price: "$29.99", desc: "Compact and elegant." },
-    { img: "/images/img1.png", name: "Product 5", price: "$19.99", desc: "Budget friendly premium." },
-    { img: "/images/img1.png", name: "Product 6", price: "$49.99", desc: "Everyday usable product." },
-    { img: "/images/img1.png", name: "Product 7", price: "$59.99", desc: "Limited edition item." },
-    { img: "/images/img1.png", name: "Product 8", price: "$39.99", desc: "Lightweight and durable." },
-    { img: "/images/img1.png", name: "Product 9", price: "$29.99", desc: "Highly rated product." },
-    { img: "/images/img1.png", name: "Product 10", price: "$19.99", desc: "Best value choice." },
-  ];
+  const product = products.id;
+   console.log(productId)
 
-  // Lock background scroll when modal is open
+  try {
+    const response = await axiosClient.post("/products/addToCart",
+     
+      {
+        productId: product.id,
+        
+        
+        quantity: 1,
+      }
+    );
+
+    console.log("Success:", response.data);
+  } catch (error) {
+    console.error(
+      "Error:",
+      error.response?.data || error.message
+    );
+  }
+};
+
+
+
+ 
   useEffect(() => {
     if (expanded !== null) {
       document.body.style.overflow = "hidden";
@@ -45,7 +50,7 @@ function ShopProducts() {
       className="min-h-screen w-full p-10 grid gap-6 justify-items-center
       grid-cols-[repeat(auto-fill,minmax(224px,1fr))]"
     >
-      {/* Product Cards */}
+      
       {products.map((product, index) => (
         <div
           key={index}
@@ -55,14 +60,14 @@ function ShopProducts() {
           transition-all duration-300"
         >
           <img
-            src={product.img}
+            src={product.image}
             alt={product.name}
             className="object-cover w-full h-full"
           />
         </div>
       ))}
 
-      {/* Expanded Modal */}
+     
       {expanded !== null && (
         <div
           className="fixed inset-0 flex items-center justify-center
@@ -76,7 +81,7 @@ function ShopProducts() {
             {/* Image Section */}
             <div className="w-full h-64 bg-gray-100 flex items-center justify-center">
               <img
-                src={products[expanded].img}
+                src={products[expanded].image}
                 alt={products[expanded].name}
                 className="w-full h-full object-contain"
               />
@@ -85,11 +90,11 @@ function ShopProducts() {
             {/* Content Section */}
             <div className="p-6 flex flex-col gap-3">
               <h2 className="text-2xl font-bold text-gray-800">
-                {products[expanded].name}
+                {products[expanded].product_name}
               </h2>
 
               <p className="text-gray-600">
-                {products[expanded].desc}
+                {products[expanded].description}
               </p>
 
               <p className="text-xl font-semibold text-green-600">
@@ -101,7 +106,11 @@ function ShopProducts() {
                   Buy Now
                 </button>
 
-                <button className="flex-1 bg-yellow-400 text-gray-800 py-2 rounded-lg hover:bg-yellow-500 transition">
+                <button
+                onClick={()=>{
+                  handleAddToCart()
+                }}
+                 className="flex-1 bg-yellow-400 text-gray-800 py-2 rounded-lg hover:bg-yellow-500 transition">
                   Add to Cart
                 </button>
               </div>

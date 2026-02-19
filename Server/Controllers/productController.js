@@ -17,8 +17,8 @@ export const getProduct =  async (req, res) => {
 
 export const addToCard = async (req, res) => {
   try {
-    const user_id = req.user.user_id;   // from JWT
-    const { product_id } = req.body;    // from frontend
+    const user_id = req.user.user_id;   
+    const { product_id } = req.body;    
 
     if (!product_id) {
       return res.status(400).json({ message: "Product ID is required" });

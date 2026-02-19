@@ -4,7 +4,7 @@ const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized - No cookie" });
+    return res.status(401).json({ message: "You need to SingIn or Login" });
   }
 
   try {
