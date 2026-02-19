@@ -1,22 +1,26 @@
-import express from 'express';
-import cors from 'cors';
+import express from 'express'
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv'
 
-//local module
-import adminRoutes from './Routes/adminRoutes.js';
-import userRoutes from './Routes/userRoutes.js';
+dotenv.config({quiet:true})
+import {checking_DB} from './Database/database.js'
+import userRoute from './Routes/userRoutr.js'
+import Products from './Routes/produstRoutes.js'
+import verifyUser from './Middleware/AuthMiddleware.js'
 
-const app = express();
-const PORT = 5000;
+const app = express()
 
-//middleware
-app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/admin", adminRoutes);
-app.use("/user", userRoutes);
 
-app.listen(PORT, () => {
-	console.log(`Server running on http://localhost:${PORT}`);
-});
+await checking_DB()
+const PORT = process.env.PORT
+
+app.use('/user',userRoute)
+app.use('/products', verifyUser ,Products)
+
+app.listen(PORT,()=>{
+    console.log(`Server is running on http://localhost:${PORT}`);
+    
+})

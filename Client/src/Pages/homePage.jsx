@@ -1,4 +1,5 @@
-import Hero from "../../Components/hero";
+import Hero from '../Components/hero';
+import { NavLink } from "react-router-dom";
 
 export default function Home() {
 	return (
@@ -17,19 +18,22 @@ export default function Home() {
 						</p>
 
 						<div className="flex gap-4">
-							<button className="bg-yellow-400 text-black px-8 py-3 rounded-full font-semibold">
+							
+							<NavLink
+								to="/Product"
+								className=" transition">
+								<button className="bg-yellow-400 text-black px-8 py-3 rounded-full font-semibold">
 								Shop Now
 							</button>
+							</NavLink>
 
-							<button className="border border-white px-8 py-3 rounded-full">
-								Explore
-							</button>
+							
 						</div>
 					</div>
 
 					{/* Right Content (Example Image) */}
-					
-					<Hero/>
+
+					<Hero />
 				</div>
 			</section>
 		</>

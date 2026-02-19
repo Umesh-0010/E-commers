@@ -1,56 +1,64 @@
-import { NavLink } from "react-router-dom";
-
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import Carts from '../Pages/carts';
+import SignIn from '../Pages/SingIn';
 
 function Navbar() {
-  return (
-    <div className="flex items-center justify-between bg-white px-8 py-4 shadow-md">
+	const [openPanel, setOpenPanel] = useState(null);
 
-    
-      <div className="text-2xl font-bold text-blue-700">
-        E-commerce
-      </div>
+	const togglePanel = (panel) => {
+		setOpenPanel(openPanel === panel ? null : panel);
+	};
 
-     
-      <div className="flex items-center gap-8 text-base font-medium">
+	return (
+		<div className="relative">
+			<div className="flex items-center justify-between bg-white px-8 py-4 shadow-md text-blue-500">
+				<div className="text-2xl font-bold text-blue-700">
+					E-commerce
+				</div>
 
-        <NavLink to="/" className="hover:text-blue-600 transition">
-          <div className="flex items-end gap-2">
-            
-            <span>Home</span>
-          </div>
-        </NavLink>
+				<div className="flex items-center gap-8 text-base font-medium">
+					<NavLink
+						to="/"
+						className="hover:text-blue-600 transition">
+						<div className="flex items-end gap-2">
+							<span>Home</span>
+						</div>
+					</NavLink>
 
-        <NavLink to="/Product" className="hover:text-blue-600 transition">
-          <div className="flex items-end gap-2">
-            
-            <span>Product</span>
-          </div>
-        </NavLink>
+					<NavLink
+						to="/Product"
+						className="hover:text-blue-600 transition">
+						<div className="flex items-end gap-2">
+							<span>Product</span>
+						</div>
+					</NavLink>
 
-        <NavLink to="/Cart" className="hover:text-blue-600 transition">
-          <div className="flex items-end gap-2">
-           
-            <span>Cart</span>
-          </div>
-        </NavLink>
+					<div
+						className="flex items-end gap-2 hover:text-blue-600 transition cursor-pointer relative"
+						onClick={() => togglePanel('cart')}>
+						<span>Cart</span>
+					</div>
+					{openPanel === 'cart' && <Carts togglePanel={togglePanel} />}
 
-        <NavLink to="/Login" className="hover:text-blue-600 transition">
-          <div className="flex items-end gap-2">
-          
-            <span>Login</span>
-          </div>
-        </NavLink>
+					<div
+						className="relative flex items-end gap-2 hover:text-blue-600 cursor-pointer"
+						onClick={() => togglePanel('login')}>
+						<span>Sin In</span>
+					</div>
+					{openPanel === 'login' && <SignIn togglePanel={togglePanel} />}
 
-        <NavLink to="/aboutUs" className="hover:text-blue-600 transition">
-          <div className="flex items-end gap-2">
-            
-            <span>About Us</span>
-          </div>
-        </NavLink>
-
-      </div>
-    </div>
-  );
+					<NavLink
+						to="/aboutUs"
+						className="hover:text-blue-600 transition">
+						<div className="flex items-end gap-2">
+							<span>About Us</span>
+						</div>
+					</NavLink>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default Navbar;
