@@ -7,25 +7,24 @@ function ShopProduct({ items = [] }) {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        setSelectedProduct(null);
-      }
-    };
-
-    if (selectedProduct) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+     if (e.key === "Escape") {
+       setSelectedProduct(null);
+     }
+     };
+     if (selectedProduct) {
+     document.body.style.overflow = "hidden";
+     window.addEventListener("keydown", handleKeyDown);
+       } else {
+     document.body.style.overflow = "";
+     }
+     return () => {
+     document.body.style.overflow = "";
+     window.removeEventListener("keydown", handleKeyDown);
+      };
   }, [selectedProduct]);
 
-  // ✅ FIXED
+  
+  
   const handleAddToCart = async () => {
     if (!selectedProduct) return;
 
@@ -43,7 +42,7 @@ function ShopProduct({ items = [] }) {
       setSelectedProduct(null); 
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-      alert("Failed to add product ❌");
+      alert("Failed to add product ");
     } finally {
       setLoading(false);
     }
