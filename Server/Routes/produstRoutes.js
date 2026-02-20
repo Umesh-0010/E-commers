@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", getProduct)
 
-router.post('/addToCart',verifyUser, addToCard)
+router.post('/addToCart', addToCard)
 
 export default router
 

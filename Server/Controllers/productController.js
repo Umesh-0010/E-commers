@@ -16,8 +16,9 @@ export const getProduct =  async (req, res) => {
 };
 
 export const addToCard = async (req, res) => {
+  console.log("REQ.USER:", req.user);
   try {
-    const user_id = req.user.user_id;   
+    const user_id = req.user.userId;   
     const { product_id } = req.body;    
 
     if (!product_id) {
