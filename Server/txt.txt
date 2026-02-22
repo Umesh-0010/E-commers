@@ -1,14 +1,11 @@
-Minimum 8 characters
-
-At least 1 uppercase letter
-
-At least 1 lowercase letter
-
-At least 1 number
-
-At least 1 special character
-
-
-to_do = update frontend/ sin in page/ password
-
-
+INSERT INTO products (product_name, description, price, image) VALUES
+('Wireless Mouse', 'Ergonomically designed wireless mouse with precision tracking and long-lasting battery life, suitable for office and gaming use.', 15.99, 'https://images.unsplash.com/photo-1660491083562-d91a64d6ea9c?q=80&w=581&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('Gaming Keyboard', 'Mechanical RGB gaming keyboard with customizable backlighting, anti-ghosting keys, and durable switches for high-performance gaming.', 49.99, 'https://images.unsplash.com/photo-1637243218672-d338945efdf7?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('USB-C Hub', 'Premium multiport USB-C hub featuring HDMI output, USB 3.0 ports, and SD card reader for enhanced connectivity and productivity.', 29.50, 'https://plus.unsplash.com/premium_photo-1761043248662-42f371ad31b4?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('External Hard Drive', '1TB portable external hard drive with USB 3.1 interface, shock-resistant casing, and high-speed data transfer for reliable storage.', 59.99, 'https://images.unsplash.com/photo-1586187543706-b43086b30978?q=80&w=526&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('Smartphone Stand', 'Adjustable smartphone desk stand compatible with all devices, featuring 360-degree rotation and non-slip silicone pads.', 9.99, 'https://images.unsplash.com/photo-1760443728221-0feabf5a0130?q=80&w=650&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('Laptop Sleeve', 'Premium 15-inch padded laptop sleeve made from water-resistant materials to protect your device from scratches and spills.', 19.99, 'https://images.unsplash.com/photo-1763034179057-acad3a072568?q=80&w=491&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('Bluetooth Speaker', 'Compact portable Bluetooth speaker delivering crisp sound, deep bass, and up to 12 hours of continuous playback.', 35.00, 'https://images.unsplash.com/photo-1588131153911-a4ea5189fe19?q=80&w=581&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('Webcam HD', '1080p high-definition USB webcam with built-in microphone, optimized for video conferencing and live streaming.', 39.99, 'https://images.unsplash.com/photo-1503072669097-a672dfe4c4ce?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('Noise Cancelling Headphones', 'Wireless over-ear headphones with active noise cancellation, long battery life, and superior audio quality for immersive listening.', 89.99, 'https://images.unsplash.com/photo-1635329086694-d02f81549dea?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+('Smartwatch', 'Advanced fitness smartwatch featuring heart rate monitoring, sleep tracking, and customizable notifications for daily activity management.', 99.99, 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');,

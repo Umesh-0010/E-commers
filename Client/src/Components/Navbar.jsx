@@ -44,7 +44,7 @@ function Navbar() {
 					<div
 						className="relative flex items-end gap-2 hover:text-blue-600 cursor-pointer"
 						onClick={() => togglePanel('login')}>
-						<span>Sin In</span>
+						<span>Sing In</span>
 					</div>
 					{openPanel === 'login' && <SignIn togglePanel={togglePanel} />}
 

@@ -1,26 +1,25 @@
 import pkg from 'pg';
-import dotenv from 'dotenv'
-dotenv.config({quiet:true})
+import dotenv from 'dotenv';
+
+dotenv.config({ quiet: true });
 
 const { Pool } = pkg;
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
- 
 
-const checking_DB = async ()=>{ 
-try {
-  await pool.query("SELECT 1");
-  console.log("Database connected successfully...........");
-} catch (error) {
-  console.error("Database connection failed...........");
-  console.error(error.message);
-}
-}
+const checking_DB = async () => { 
+  try {
+    const res = await pool.query('SELECT NOW()');
+    console.log('Connected:', res.rows);
+  } catch (err) {
+    console.error('Error:', err);
+  }
+};
 
-
-export {pool, checking_DB};
+export { pool, checking_DB };

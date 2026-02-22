@@ -30,7 +30,7 @@ const App = () => {
 					element={<SingIn />}
 				/>
 				<Route
-					path="/aboutUs" 
+					path="/aboutUs"
 					element={<AboutUs />}
 				/>
 				<Route

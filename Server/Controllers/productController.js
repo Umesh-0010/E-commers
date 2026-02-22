@@ -94,3 +94,26 @@ export const getCart = async (req, res) => {
     }
 };
 
+export const removeProduct = async (req,res)=>{
+
+	try {
+		let {productid} =req.body
+		const user_id = req.user.userId;
+
+		const result = await pool.query(
+      `DELETE FROM cart WHERE user_id = $1 AND product_id = $2 RETURNING *`,
+      [user_id, productid]
+    );
+
+	
+
+	res.status(200).json({
+  	message: `Product removed successfully ${productid}`,
+	});
+		
+	} catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
