@@ -6,6 +6,8 @@ import Cart from './Pages/carts.jsx';
 import HomePage from './Pages/homePage.jsx';
 import Product from './Pages/Product.jsx';
 import SingIn from './Pages/SingIn.jsx';
+import Payment from './Pages/Payment.jsx';
+import PaymentPage from './Pages/Payment.jsx';
 
 const App = () => {
 	return (
@@ -32,6 +34,10 @@ const App = () => {
 				<Route
 					path="/aboutUs"
 					element={<AboutUs />}
+				/>
+				<Route
+					path="/payment"
+					element={<PaymentPage/>}
 				/>
 				<Route
 					path="/*"

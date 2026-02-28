@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axiosClient from '../Services/api.js';
 
 function Carts({ togglePanel }) {
+	const navigate = useNavigate();
+
 	const [loading, setLoading] = useState(false);
 	const [cartItems, setCartItems] = useState([]);
 	const [error, setError] = useState(null);
@@ -34,29 +37,46 @@ function Carts({ togglePanel }) {
 		return () => controller.abort();
 	}, []);
 
-	const handleBuy = (product) => {
-		alert(`Buying ${product.product_name} for $${product.price}`);
+	// ✅ Buy handler
+	const handleToBuy = async (product) => {
+		try {
+			setLoading(true);
+			setError(null);
+
+			const response = await axiosClient.get(
+				`/products/buy/${product.product_id}`
+			);
+
+			const data = response.data;
+
+			navigate('/payment', { state: data });
+
+		} catch (error) {
+			console.error('Error:', error.response?.data || error.message);
+			alert('Failed to proceed to payment');
+		} finally {
+			setLoading(false);
+		}
 	};
 
-	const handleRemove = async (product_id) => {
-  try {
-    setRemovingId(product_id);
-    setError(null);
+	// ✅ Remove handler (added)
+	const handleRemove = async (productId) => {
+		try {
+			setRemovingId(productId);
 
-    
-    const response = await axiosClient.delete(`/products/removeProduct`, {
-      data: { productid: product_id },
-    });
-    alert(response.data.message);
-    setCartItems((prev) =>
-      prev.filter((item) => item.product_id !== product_id)
-    );
-  } catch (error) {
-    setError('Failed to remove item');
-  } finally {
-    setRemovingId(null);
-  }
-};
+			await axiosClient.delete(`/products/cart/${productId}`);
+
+			// Remove item from UI instantly
+			setCartItems((prev) =>
+				prev.filter((item) => item.product_id !== productId)
+			);
+		} catch (err) {
+			console.error('Remove error:', err.response?.data || err.message);
+			alert('Failed to remove item');
+		} finally {
+			setRemovingId(null);
+		}
+	};
 
 	return (
 		<div className="fixed top-5 right-5 h-[80%] w-1/3 bg-linear-to-br from-blue-500 via-indigo-600 to-purple-700 shadow-2xl overflow-auto z-50 p-3 rounded-xl noscroller">
@@ -85,6 +105,7 @@ function Carts({ togglePanel }) {
 							<div
 								key={item.product_id}
 								className="flex flex-col md:flex-row gap-4 p-5 rounded-2xl bg-white/10 backdrop-blur-md shadow-lg transition-transform duration-300 hover:scale-105">
+								
 								<div className="relative h-28 w-28 md:h-32 md:w-32 rounded-xl overflow-hidden border border-white/20 bg-linear-to-tr from-white/5 via-white/10 to-white/5 shadow-inner">
 									<img
 										src={item.image || '/images/img1.png'}
@@ -109,15 +130,13 @@ function Carts({ togglePanel }) {
 										</p>
 										<p className="text-blue-200 text-xs mt-1 italic">
 											Subtotal: ₹
-											{parseFloat(item.subtotal).toFixed(
-												2,
-											)}
+											{parseFloat(item.subtotal).toFixed(2)}
 										</p>
 									</div>
 
 									<div className="flex gap-3 mt-4">
 										<button
-											onClick={() => handleBuy(item)}
+											onClick={() => handleToBuy(item)}
 											className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-xl transition-colors">
 											Buy
 										</button>

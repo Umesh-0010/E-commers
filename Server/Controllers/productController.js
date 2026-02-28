@@ -22,9 +22,7 @@ export const addToCard = async (req, res) => {
 		const user_id = req.user.userId;
 		const { product_id } = req.body;
 
-		if (!product_id) {
-			return res.status(400).json({ message: 'Product ID is required' });
-		}
+		
 
 		const existing = await pool.query(
 			'SELECT quantity FROM cart WHERE user_id = $1 AND product_id = $2',
@@ -116,4 +114,42 @@ export const removeProduct = async (req,res)=>{
     res.status(500).json({ message: 'Server error' });
   }
 }
+
+export const getBuy = async (req, res) => {
+  try {
+    const user_id = req.user.userId;
+    const { productId } = req.params;
+
+   
+    const userResult = await pool.query(
+      'SELECT name FROM users WHERE id = $1',
+      [user_id]
+    );
+
+    if (userResult.rows.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    
+    const productResult = await pool.query(
+      'SELECT * FROM products WHERE id = $1',
+      [productId]
+    );
+
+    if (productResult.rows.length === 0) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({
+      userName: userResult.rows[0].name,
+      product: productResult.rows[0],
+    });
+
+  } catch (error) {
+    console.error("getBuy error:", error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+
 

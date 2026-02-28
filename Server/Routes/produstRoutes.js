@@ -1,10 +1,13 @@
 import express from 'express'
-import {getProduct, addToCard, getCart, removeProduct} from '../Controllers/productController.js'
+import {getProduct, addToCard, getCart, removeProduct, getBuy} from '../Controllers/productController.js'
 
 
 const router = express.Router();
 
 router.get("/", getProduct)
+
+router.get("/buy/:productId", getBuy)
+
 
 router.post('/addToCart', addToCard)
 

@@ -39,14 +39,18 @@ function Navbar() {
 						onClick={() => togglePanel('cart')}>
 						<span>Cart</span>
 					</div>
-					{openPanel === 'cart' && <Carts togglePanel={togglePanel} />}
+					{openPanel === 'cart' && (
+						<Carts togglePanel={togglePanel} />
+					)}
 
 					<div
 						className="relative flex items-end gap-2 hover:text-blue-600 cursor-pointer"
 						onClick={() => togglePanel('login')}>
 						<span>Sing In</span>
 					</div>
-					{openPanel === 'login' && <SignIn togglePanel={togglePanel} />}
+					{openPanel === 'login' && (
+						<SignIn togglePanel={togglePanel} />
+					)}
 
 					<NavLink
 						to="/aboutUs"
